@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book a Table | Gaurao Garden</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        :root {
+            --primary-maroon: #7F1D1D; 
+            --primary-hover: #5e1414;
+            --accent-gold: #D4AF37; 
+            --accent-gold-light: #FDE047;
+            --bg-light: #FAFAF9;
+            --text-dark: #1C1917;
+            --text-gray: #57534E;
+            --white: #FFFFFF;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, .serif { font-family: 'Playfair Display', serif; }
+
+        /* --- Header / Nav --- */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary-maroon);
+            text-decoration: none;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-links { display: flex; gap: 30px; align-items: center; }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover, .nav-links a.active { color: var(--primary-maroon); }
+
+        .btn-nav {
+            background-color: var(--primary-maroon);
+            color: white !important;
+            padding: 10px 20px;
+            border-radius: 4px;
+            transition: background 0.3s;
+        }
+        
+        .btn-nav:hover { background-color: var(--primary-hover); }
+
+        .hamburger { display: none; cursor: pointer; font-size: 1.5rem; }
+
+        /* --- Reservation Hero --- */
+        .reserve-hero {
+            height: 50vh;
+            margin-top: 80px;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+
+        .reserve-hero h1 { font-size: 3.5rem; margin-bottom: 15px; }
+
+        /* --- Form Section --- */
+        .reservation-section { padding: 80px 0; }
+        
+        .booking-wrapper {
+            background: white;
+            box-shadow: var(--shadow);
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        @media(min-width: 768px) {
+            .booking-wrapper { flex-direction: row; }
+        }
+
+        .booking-info {
+            background: var(--primary-maroon);
+            color: white;
+            padding: 40px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .booking-form {
+            padding: 40px;
+            flex: 1.5;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-group { margin-bottom: 20px; }
+        .form-group.full { grid-column: span 2; }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #e5e5e5;
+            border-radius: 4px;
+            font-family: inherit;
+            background: #fafaf9;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--accent-gold);
+            background: white;
+        }
+
+        .btn-submit {
+            background-color: var(--accent-gold);
+            color: #4a3800;
+            border: none;
+            padding: 15px 30px;
+            width: 100%;
+            font-weight: 700;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background 0.3s;
+            text-transform: uppercase;
+        }
+
+        .btn-submit:hover { background-color: var(--accent-gold-light); }
+
+        .info-item {
+            margin-bottom: 25px;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        /* --- Footer --- */
+        footer {
+            background-color: #000;
+            color: #9CA3AF;
+            padding: 60px 0 20px;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        .footer-col h4 { color: white; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 10px; }
+        .footer-col ul li a { color: #9CA3AF; text-decoration: none; transition: color 0.3s; }
+        .footer-col ul li a:hover { color: var(--accent-gold); }
+
+        @media (max-width: 768px) {
+            .hamburger { display: block; }
+            .nav-links { display: none; }
+            .form-grid { grid-template-columns: 1fr; }
+            .form-group.full { grid-column: span 1; }
+        }
+.logo-img {
+    width: 100px;      /* adjust size */
+    height: 90px;     /* keep square */
+    object-fit: cover;
+    margin-right: 1px;
+}
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <img src="IMG_4649.PNG" alt="Logo" class="logo-img">
+                GAURAV GARDEN
+            </a>
+            <div class="hamburger"><i data-lucide="menu"></i></div>
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="menu.html">Menu</a>
+                <a href="events.html">Events</a>
+                <a href="gallery.html">Gallery</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+                <a href="reservations.html" class="btn-nav">Book Table</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="reserve-hero">
+        <div class="container">
+            <h1 class="serif">Reserve Your Table</h1>
+            <p style="font-size: 1.1rem; color: rgba(255,255,255,0.9);">Secure your spot for an unforgettable dining experience.</p>
+        </div>
+    </section>
+
+    <!-- Reservation Form -->
+    <section class="reservation-section">
+        <div class="container">
+            <div class="booking-wrapper">
+                
+                <!-- Left: Info -->
+                <div class="booking-info">
+                    <h3 class="serif" style="font-size: 1.8rem; margin-bottom: 30px; color: white;">Booking Policy</h3>
+                    
+                    <div class="info-item">
+                        <i data-lucide="clock" style="color: var(--accent-gold);"></i>
+                        <div>
+                            <h4 style="color:white; margin-bottom: 5px;">Reservation Duration</h4>
+                            <p style="font-size: 0.9rem; opacity: 0.8;">Tables are reserved for 2 hours from the booking time.</p>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <i data-lucide="users" style="color: var(--accent-gold);"></i>
+                        <div>
+                            <h4 style="color:white; margin-bottom: 5px;">Group Bookings</h4>
+                            <p style="font-size: 0.9rem; opacity: 0.8;">For parties larger than 10, please contact our events team directly.</p>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <i data-lucide="phone" style="color: var(--accent-gold);"></i>
+                        <div>
+                            <h4 style="color:white; margin-bottom: 5px;">Need Help?</h4>
+                            <p style="font-size: 0.9rem; opacity: 0.8;">Call us at +91 98765 43210</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Form -->
+                <div class="booking-form">
+                    <h3 class="serif" style="font-size: 1.8rem; margin-bottom: 30px; color: var(--text-dark);">Make a Reservation</h3>
+                    <form onsubmit="event.preventDefault(); alert('Reservation Requested! We will confirm via email/SMS shortly.');">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>Date</label>
+                                <input type="date" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Time</label>
+                                <select required>
+                                    <option value="">Select Time</option>
+                                    <option>12:00 PM</option>
+                                    <option>1:00 PM</option>
+                                    <option>2:00 PM</option>
+                                    <option>3:00 PM</option>
+                                    <option>7:00 PM</option>
+                                    <option>8:00 PM</option>
+                                    <option>9:00 PM</option>
+                                    <option>10:00 PM</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Guests</label>
+                                <select required>
+                                    <option>2 People</option>
+                                    <option>3 People</option>
+                                    <option>4 People</option>
+                                    <option>5 People</option>
+                                    <option>6+ People</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Seating Preference</label>
+                                <select>
+                                    <option>No Preference</option>
+                                    <option>Indoor Dining Hall</option>
+                                    <option>Garden Terrace</option>
+                                    <option>Private Booth</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Full Name</label>
+                            <input type="text" placeholder="John Doe" required>
+                        </div>
+
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="email" placeholder="email@example.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Phone</label>
+                                <input type="tel" placeholder="+91 98765 43210" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Special Requests (Optional)</label>
+                            <textarea rows="3" placeholder="Allergies, anniversary, high chair needed..."></textarea>
+                        </div>
+
+                        <button type="submit" class="btn-submit">Confirm Booking</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="logo" style="margin-bottom: 20px; color: white;">
+                        <i data-lucide="flower-2"></i> GAURAV GARDEN
+                    </div>
+                    <p>The best dining experience for you and your family. We serve love on a plate with memories.</p>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="menu.html">Our Menu</a></li>
+                        <li><a href="reservations.html">Book Table</a></li>
+                        <li><a href="events.html">Events</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <ul>
+                        <li><i data-lucide="map-pin" size="14" style="color: var(--accent-gold);"></i> Parner, Ahilyanagar, MH</li>
+                        <li><i data-lucide="phone" size="14" style="color: var(--accent-gold);"></i> +91 98765 43210</li>
+                        <li><i data-lucide="message-circle" size="14" style="color: var(--accent-gold);"></i> +91 98765 43210</li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Opening Hours</h4>
+                    <ul>
+                        <li style="display: flex; justify-content: space-between;"><span>Mon - Sun:</span> <span style="color: white;">10:00 - 23:00</span></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div style="text-align: center; border-top: 1px solid #333; padding-top: 20px; font-size: 0.8rem;">
+                &copy; 2025 Gaurao Garden. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        // Hamburger Menu Toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        
+        if(hamburger) {
+            hamburger.addEventListener('click', () => {
+                const isHidden = navLinks.style.display === 'none' || navLinks.style.display === '';
+                navLinks.style.display = isHidden ? 'flex' : 'none';
+                if(isHidden) {
+                    navLinks.style.flexDirection = 'column';
+                    navLinks.style.position = 'absolute';
+                    navLinks.style.top = '80px';
+                    navLinks.style.left = '0';
+                    navLinks.style.width = '100%';
+                    navLinks.style.background = 'white';
+                    navLinks.style.padding = '20px';
+                    navLinks.style.boxShadow = '0 5px 5px rgba(0,0,0,0.1)';
+                }
+            });
+        }
+    </script>
+</body>
+</html>

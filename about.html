@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | Gaurao Garden</title>
+    <!-- Fonts: Playfair Display (Serif) & Lato (Sans) -->
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        :root {
+            --primary-maroon: #7F1D1D; 
+            --primary-hover: #5e1414;
+            --accent-gold: #D4AF37; 
+            --accent-gold-light: #FDE047;
+            --bg-light: #FAFAF9;
+            --text-dark: #1C1917;
+            --text-gray: #57534E;
+            --white: #FFFFFF;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, .serif { font-family: 'Playfair Display', serif; }
+
+        /* --- Header / Nav --- */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary-maroon);
+            text-decoration: none;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-links { display: flex; gap: 30px; align-items: center; }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover, .nav-links a.active { color: var(--primary-maroon); }
+
+        .btn-nav {
+            background-color: var(--primary-maroon);
+            color: white !important;
+            padding: 10px 20px;
+            border-radius: 4px;
+            transition: background 0.3s;
+        }
+        
+        .btn-nav:hover { background-color: var(--primary-hover); }
+
+        .hamburger { display: none; cursor: pointer; font-size: 1.5rem; }
+
+        /* --- About Hero --- */
+        .about-hero {
+            height: 60vh;
+            margin-top: 80px;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('img_5704.png');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+
+        .about-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+        }
+
+        /* --- Section Styling --- */
+        section { padding: 80px 0; }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-subtitle {
+            color: var(--primary-maroon);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            display: block;
+            margin-bottom: 10px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--text-dark);
+        }
+
+        /* --- Story Section --- */
+        .story-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .story-content p {
+            margin-bottom: 20px;
+            font-size: 1.05rem;
+            color: var(--text-gray);
+        }
+
+        .story-images {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .story-img {
+            width: 100%;
+            border-radius: 8px;
+            height: 300px;
+            object-fit: cover;
+            box-shadow: var(--shadow);
+        }
+
+        .story-img.tall {
+            grid-row: span 2;
+            height: 100%;
+        }
+
+        /* --- Philosophy Cards --- */
+        .philosophy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .philo-card {
+            background: white;
+            padding: 40px 30px;
+            text-align: center;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .philo-card:hover {
+            border-bottom-color: var(--accent-gold);
+            transform: translateY(-5px);
+        }
+
+        .philo-icon {
+            background: #FEF3C7;
+            color: #B45309;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+
+        /* --- Team Section --- */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .team-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .team-card:hover { transform: translateY(-5px); }
+
+        .team-img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            filter: grayscale(20%);
+            transition: filter 0.3s;
+        }
+
+        .team-card:hover .team-img { filter: grayscale(0%); }
+
+        .team-info { padding: 20px; }
+        .team-name { font-size: 1.2rem; font-weight: 700; margin-bottom: 5px; color: var(--text-dark); }
+        .team-role { color: var(--primary-maroon); font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* --- Footer --- */
+        footer {
+            background-color: #000;
+            color: #9CA3AF;
+            padding: 60px 0 20px;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        .footer-col h4 { color: white; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 10px; }
+        .footer-col ul li a { color: #9CA3AF; text-decoration: none; transition: color 0.3s; }
+        .footer-col ul li a:hover { color: var(--accent-gold); }
+
+        @media (max-width: 768px) {
+            .hamburger { display: block; }
+            .nav-links { display: none; }
+            .story-grid { grid-template-columns: 1fr; }
+            .story-images { display: none; } /* Simplify for mobile */
+        }
+.logo-img {
+    width: 100px;      /* adjust size */
+    height: 90px;     /* keep square */
+    object-fit: cover;
+    margin-right: 1px;
+}
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <img src="IMG_4649.PNG" alt="Logo" class="logo-img">
+                GAURAV GARDEN
+            </a>
+            <div class="hamburger"><i data-lucide="menu"></i></div>
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="menu.html">Menu</a>
+                <a href="events.html">Events</a>
+                <a href="gallery.html">Gallery</a>
+                <a href="about.html" class="active">About</a>
+                <a href="contact.html">Contact</a>
+                <a href="reservations.html" class="btn-nav">Book Table</a>
+
+                    
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="about-hero">
+        <div class="container">
+            <h1 class="serif">Our Heritage</h1>
+            <p style="font-size: 1.1rem; color: rgba(255,255,255,0.9);">A legacy of flavor, family, and fine dining since 1998.</p>
+        </div>
+    </section>
+
+    <!-- Our Story -->
+    <section>
+        <div class="container">
+            <div class="story-grid">
+                <div class="story-content">
+                    <span class="section-subtitle">Our Journey</span>
+                    <h2 class="serif" style="margin-bottom: 25px;">From a Humble Garden to a Culinary Destination</h2>
+                    <p>
+                        Gaurav Garden began in 1998 as a small family-run bistro with a simple mission: to serve food that feels like a warm embrace. Founded by the Rossi family, our establishment was built on the grounds of an old olive orchard, preserving the natural beauty that surrounds us today.
+                    </p>
+                    <p>
+                        Over the past two decades, we have evolved into a premier dining destination, yet our core values remain unchanged. We believe that great food starts with the earth. That's why 80% of our vegetables are harvested daily from our own on-site organic gardens.
+                    </p>
+                    <p>
+                        Today, Gaurao Garden is not just a restaurant; it's a celebration of life, seasons, and the joy of gathering around a table.
+                    </p>
+                    <img src="https://images.unsplash.com/photo-1550966871-3ed3c47e2ce2?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Signature" style="height: 50px; opacity: 0.7; margin-top: 10px;">
+                </div>
+                <div class="story-images">
+                    <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Restaurant Interior" class="story-img tall">
+                    <img src="https://images.unsplash.com/photo-1600565193348-f74bd3c7ccdf?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Chef Cooking" class="story-img">
+                    <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Garden" class="story-img">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Philosophy -->
+    <section style="background-color: #FFFBEB;">
+        <div class="container">
+            <div class="section-title">
+                <span class="section-subtitle">Our Philosophy</span>
+                <h2>What We Stand For</h2>
+            </div>
+
+            <div class="philosophy-grid">
+                <div class="philo-card">
+                    <div class="philo-icon"><i data-lucide="leaf" size="28"></i></div>
+                    <h3 class="serif" style="margin-bottom: 15px;">Farm to Table</h3>
+                    <p style="color: var(--text-gray);">We source our ingredients from local farmers and our own gardens to ensure maximum freshness and support our community.</p>
+                </div>
+                <div class="philo-card">
+                    <div class="philo-icon"><i data-lucide="recycle" size="28"></i></div>
+                    <h3 class="serif" style="margin-bottom: 15px;">Sustainability</h3>
+                    <p style="color: var(--text-gray);">We are committed to zero-waste practices, composting organic waste and minimizing our carbon footprint.</p>
+                </div>
+                <div class="philo-card">
+                    <div class="philo-icon"><i data-lucide="heart-handshake" size="28"></i></div>
+                    <h3 class="serif" style="margin-bottom: 15px;">Hospitality</h3>
+                    <p style="color: var(--text-gray);">We believe in service that anticipates needs. Every guest is treated like family from the moment they walk through our doors.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team -->
+    <section>
+        <div class="container">
+            <div class="section-title">
+                <span class="section-subtitle">Meet The Makers</span>
+                <h2>Our Culinary Team</h2>
+            </div>
+
+            <div class="team-grid">
+                <!-- Team 1 -->
+                <div class="team-card">
+                    <img src="https://images.unsplash.com/photo-1583394838336-acd977736f90?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Chef" class="team-img">
+                    <div class="team-info">
+                        <div class="team-name">Alessandro Rossi</div>
+                        <div class="team-role">Executive Chef</div>
+                    </div>
+                </div>
+                <!-- Team 2 -->
+                <div class="team-card">
+                    <img src="https://images.unsplash.com/photo-1595273670150-bd0c3c392e46?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Manager" class="team-img">
+                    <div class="team-info">
+                        <div class="team-name">Sarah Jenkins</div>
+                        <div class="team-role">General Manager</div>
+                    </div>
+                </div>
+                <!-- Team 3 -->
+                <div class="team-card">
+                    <img src="https://images.unsplash.com/photo-1560787313-5dff3307e257?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Sommelier" class="team-img">
+                    <div class="team-info">
+                        <div class="team-name">Marcus Thorne</div>
+                        <div class="team-role">Head Sommelier</div>
+                    </div>
+                </div>
+                <!-- Team 4 -->
+                <div class="team-card">
+                    <img src="https://images.unsplash.com/photo-1581349485608-9469926a8e5e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Pastry Chef" class="team-img">
+                    <div class="team-info">
+                        <div class="team-name">Elena Gomez</div>
+                        <div class="team-role">Pastry Chef</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="logo" style="margin-bottom: 20px; color: white;">
+                        <i data-lucide="flower-2"></i> GAURAO GARDEN
+                    </div>
+                    <p>The best dining experience for you and your family. We serve love on a plate with memories.</p>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="menu.html">Menu</a></li>
+                        <li><a href="events.html">Events</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="reservations.html">Book Table</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <ul>
+                        <li><i data-lucide="map-pin" size="14" style="color: var(--accent-gold);"></i> 123 Culinary St, Taste City</li>
+                        <li><i data-lucide="phone" size="14" style="color: var(--accent-gold);"></i> +1 (555) 123-4567</li>
+                        <li><i data-lucide="mail" size="14" style="color: var(--accent-gold);"></i> info@gauraogarden.com</li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Opening Hours</h4>
+                    <ul>
+                        <li style="display: flex; justify-content: space-between;"><span>Mon - Fri:</span> <span style="color: white;">09:00 - 22:00</span></li>
+                        <li style="display: flex; justify-content: space-between;"><span>Sat - Sun:</span> <span style="color: white;">10:00 - 23:00</span></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div style="text-align: center; border-top: 1px solid #333; padding-top: 20px; font-size: 0.8rem;">
+                &copy; 2025 Gaurao Garden. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        // Hamburger Menu Toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        
+        if(hamburger) {
+            hamburger.addEventListener('click', () => {
+                const isHidden = navLinks.style.display === 'none' || navLinks.style.display === '';
+                navLinks.style.display = isHidden ? 'flex' : 'none';
+                if(isHidden) {
+                    navLinks.style.flexDirection = 'column';
+                    navLinks.style.position = 'absolute';
+                    navLinks.style.top = '80px';
+                    navLinks.style.left = '0';
+                    navLinks.style.width = '100%';
+                    navLinks.style.background = 'white';
+                    navLinks.style.padding = '20px';
+                    navLinks.style.boxShadow = '0 5px 5px rgba(0,0,0,0.1)';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
